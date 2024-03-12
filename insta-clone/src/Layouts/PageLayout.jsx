@@ -2,6 +2,9 @@ import { Box, Flex } from "@chakra-ui/react";
 import SideBar from "../pages/Navigation/SideBar";
 import { useLocation } from "react-router-dom"
 
+// instead of adding the SideBar component to every page, we can add it only tonce to the PageLayout component and wrap the children with it. 
+//This way, we can have a sidebar on every page except the AuthPage.
+
 const PageLayout = ({ children }) => {
 	const { pathname } = useLocation();
 	return (
