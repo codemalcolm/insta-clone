@@ -4,13 +4,13 @@ import PostFooter from "./PostFooter"
 
 const FeedPost = () => {
   return (
-    <>
+    <Box backgroundColor={"#111114"}>
       <PostHeader/>
-      <Box>
+      <Box borderRadius={8} overflow={"hidden"}>
         <Image src="/img1.png" alt="user profile pic" />
       </Box>
       <PostFooter />
-    </>
+    </Box>
   )
 }
 
