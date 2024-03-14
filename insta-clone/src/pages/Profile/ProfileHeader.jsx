@@ -24,9 +24,33 @@ const ProfileHeader = () => {
                         asaprogrammer_
                     </Text>
                     <Flex gap={4} alignContent={"center"} justifyContent={"center"}> 
-                        <Button bg={"gray.400"} color={"black"} h={8}>Edit Profile</Button>
+                        <Button bg={"gray.400"} color={"black"} h={8} size={{base:"xs", md:"sm"}}>Edit Profile</Button>
                     </Flex>
                 </Flex>
+				<Flex alignItems={"center"} gap={{base:2, sm:4}} >
+					<Text fontSize={{base:"xs", md:"sm"}}>
+						<Text as="span" fontWeight={"bold"} mr={1}>
+						4
+						</Text>
+						Posts
+					</Text>
+					<Text fontSize={{base:"xs", md:"sm"}}>
+						<Text as="span" fontWeight={"bold"} mr={1}>
+						120
+						</Text>
+						Followers
+					</Text>
+					<Text fontSize={{base:"xs", md:"sm"}}>
+						<Text as="span" fontWeight={"bold"} mr={1}>
+						175
+						</Text>
+						Following
+					</Text>
+				</Flex>
+				<Flex alignItems={"center"} gap={4}>
+					<Text fontSize={"small"} fontWeight={"bold"}>asaprogrammer</Text>
+				</Flex>
+				<Text fontSize={"small"}>Tutorials meant to level up your skills as a programmer</Text>
             </VStack>
 		</Flex>
 	);
