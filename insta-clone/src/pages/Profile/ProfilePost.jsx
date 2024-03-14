@@ -1,7 +1,8 @@
-import { GridItem, Flex, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Box, Avatar } from "@chakra-ui/react";
+import { GridItem, Flex, Text, Image, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Box, Avatar, Divider, VStack } from "@chakra-ui/react";
 import { FaRegHeart, FaRegComment } from "react-icons/fa";
 import { useDisclosure } from "@chakra-ui/react"
 import { MdDelete } from "react-icons/md";
+import Comment from "../Feed/Comment";
 
 
 const ProfilePost = ({img}) => {
@@ -50,8 +51,7 @@ const ProfilePost = ({img}) => {
             size={{base:"2xl", md:"4xl"}}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
-                    <ModalCloseButton />
+                    <ModalCloseButton _hover={{color:"white",bg:"red"}}/>
                     <ModalBody bg={"black"} pb={5}>
                         <Flex gap={4} w={{base:"90%",sm:"70%", md:"full"}} mx={"auto"}>
                             <Box borderRadius={4}
@@ -62,18 +62,32 @@ const ProfilePost = ({img}) => {
                             >
                                 <Image src={img} alt="Profile Post"/>
                             </Box>
-                            <Flex flex={1} flexDirection={"column"} px={10} display={{base:"none", md:"flex"}}>
+                            <Flex flex={1} flexDirection={"column"} px={10} display={{base:"none", md:"flex"}}
+                            >
                                 <Flex alignItems={"center"} justifyContent={"space-between"}>
-                                    <Avatar src="/profilepic.png" size={"sm"} name="As a Programmer"/>
-                                    <Text>
-                                        asaprogrammer_
-                                    </Text>
+                                <Flex alignItems={"center"} justifyContent={"start"} gap={2} alignContent={"center"}
+                                >
+                                        <Avatar src="/profilepic.png" size={"sm"} name="As a Programmer"/>
+                                        <Text>
+                                            asaprogrammer_
+                                        </Text>
+                                    </Flex>
+                                    <Box justifyContent={"center"}_hover={{color:"white",bg:"red"}} borderRadius={4} p={1}>
+                                            <MdDelete size={20} cursor="pointer"/>
+                                    </Box>
                                 </Flex>
-                                <Box>
-                                    <MdDelete size={20} cursor="pointer"/>
-                                </Box>
+                                <Divider h={"1.25px"} my={4} bg={"gray.500"}/>
+                                <VStack w={"full"} alignItems={"start"} maxH={"350px"} overflowY={"auto"}>
+                                <Comment 
+                                    createdAt="One day ago"
+                                    username="asaprogrammer"
+                                    profilePic="/profilepic.png"
+                                    text={"Dummy images form unsplash"}
+                                />
+                                </VStack>
                             </Flex>
                         </Flex>
+
                     </ModalBody>
                 </ModalContent>
             </Modal>
