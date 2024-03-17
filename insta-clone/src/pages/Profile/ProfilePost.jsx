@@ -3,6 +3,7 @@ import { FaRegHeart, FaRegComment } from "react-icons/fa";
 import { useDisclosure } from "@chakra-ui/react"
 import { MdDelete } from "react-icons/md";
 import Comment from "../Feed/Comment";
+import PostFooter from "../Feed/PostFooter"
 
 
 const ProfilePost = ({img}) => {
@@ -84,10 +85,61 @@ const ProfilePost = ({img}) => {
                                     profilePic="/profilepic.png"
                                     text={"Dummy images form unsplash"}
                                 />
+                                <Comment 
+                                    createdAt="One day ago"
+                                    username="asaprogrammer"
+                                    profilePic="/profilepic.png"
+                                    text={"Dummy images form unsplash"}
+                                />
+                                <Comment 
+                                    createdAt="One day ago"
+                                    username="asaprogrammer"
+                                    profilePic="/profilepic.png"
+                                    text={"Dummy images form unsplash"}
+                                />
+                                <Comment 
+                                    createdAt="One day ago"
+                                    username="asaprogrammer"
+                                    profilePic="/profilepic.png"
+                                    text={"Dummy images form unsplash"}
+                                />
+                                <Comment 
+                                    createdAt="One day ago"
+                                    username="asaprogrammer"
+                                    profilePic="/profilepic.png"
+                                    text={"Dummy images form unsplash"}
+                                />
+                                <Comment 
+                                    createdAt="One day ago"
+                                    username="asaprogrammer"
+                                    profilePic="/profilepic.png"
+                                    text={"Dummy images form unsplash"}
+                                />
+                                <Comment 
+                                    createdAt="One day ago"
+                                    username="asaprogrammer"
+                                    profilePic="/profilepic.png"
+                                    text={"Dummy images form unsplash"}
+                                />
+                                <Comment 
+                                    createdAt="One day ago"
+                                    username="asaprogrammer"
+                                    profilePic="/profilepic.png"
+                                    text={"Dummy images form unsplash"}
+                                />
+                                <Comment 
+                                    createdAt="One day ago"
+                                    username="asaprogrammer"
+                                    profilePic="/profilepic.png"
+                                    text={"Dummy images form unsplash"}
+                                />
                                 </VStack>
+                                <Flex mt={"auto"} flexDirection={"column"}>
+                                    <Divider my={4} bg={"gray.800"}/>
+                                    <PostFooter isProfilePage={true}/>
+                                </Flex>
                             </Flex>
                         </Flex>
-
                     </ModalBody>
                 </ModalContent>
             </Modal>

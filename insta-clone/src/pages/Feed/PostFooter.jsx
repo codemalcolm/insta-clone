@@ -13,7 +13,7 @@ import {
 	NotificationsLogo,
 	UnlikeLogo,
 } from "../../assets/constants";
-const PostFooter = ({username}) => {
+const PostFooter = ({username, isProfilePage}) => {
 	const [liked, setLiked] = useState(false);
 	const [likes, setLikes] = useState(1000);
 	const handleLike = () => {
@@ -38,15 +38,19 @@ const PostFooter = ({username}) => {
 			<Text fontWeight={600} fontSize={"sm"}>
 				{likes} likes
 			</Text>
-			<Text fontWeight={700} fontSize={"sm"}>
-				{username}{" "}
-				<Text as="span" fontWeight={600} fontSize={"sm"}>
-					Feeling good
-				</Text>
-			</Text>
-			<Text color={"gray"} fontSize={"sm"}>
-				View all {likes} comments
-			</Text>
+			{!isProfilePage &&(
+				<>
+					<Text fontWeight={700} fontSize={"sm"}>
+						{username}{" "}
+						<Text as="span" fontWeight={600} fontSize={"sm"}>
+							Feeling good
+						</Text>
+					</Text>
+					<Text color={"gray"} fontSize={"sm"}>
+						View all {likes} comments
+					</Text>
+				</>
+			)}
 			<Flex
 				alignItems={"center"}
 				gap={2}
