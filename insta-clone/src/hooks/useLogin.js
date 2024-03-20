@@ -19,9 +19,11 @@ const useLogin = () => {
             return showToast("Error", "Please fill in all the fields", "error")
         }
         try {
+
             const userCred = await signInWithEmailAndPassword(inputs.email, inputs.password)
+            
             if(userCred){
-                const docRef = doc(firestore, userCred, userCred.user.id);
+                const docRef = doc(firestore, "users", userCred.user.uid);
                 const docSnap = await getDoc(docRef);
                 localStorage.setItem("user-info", JSON.stringify(docSnap.data()))
                 loginUser(docSnap.data())
@@ -29,9 +31,8 @@ const useLogin = () => {
         } catch (error) {
             showToast("Error", error.message, "error")
         }
-
-        return { loading, error, login };
       }
+    return { loading, error, login };
 }
 
 export default useLogin

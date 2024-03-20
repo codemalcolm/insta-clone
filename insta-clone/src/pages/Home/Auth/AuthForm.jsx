@@ -41,7 +41,7 @@ const AuthForm = () => {
 						justifyContent={"center"}
 						cursor={"pointer"}
 					>
-					<GoogleAuth/>
+					<GoogleAuth isLogin={isLogin}/>
 					</Flex>
 				</VStack>
 			</Box>
