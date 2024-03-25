@@ -25,14 +25,17 @@ const useGetUserProfileByUsername = (username) => {
                 })
 
                 setUserProfile(userDoc);
+				console.log(userDoc)
 			} catch (error) {
 				showToast("Error", error.message, "error");
+			}finally{
+				setIsLoading(false)
 			}
 		};
         getUserProfile();
 	}, [setUserProfile, username, showToast]);
 
-	return <div>useGetUserProfileByUsername</div>;
+	return {isLoading, userProfile}
 };
 
 export default useGetUserProfileByUsername;
