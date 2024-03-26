@@ -15,7 +15,6 @@ import {
 	ModalHeader,
 	ModalBody,
 } from "@chakra-ui/react";
-import { SmallCloseIcon } from "@chakra-ui/icons";
 import { useRef, useState } from "react";
 import useShowToast from "../../hooks/useShowToast";
 import useAuthStore from "../../store/authStore";

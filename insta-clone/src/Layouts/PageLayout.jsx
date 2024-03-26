@@ -1,7 +1,6 @@
 import { Box, Flex, Spinner } from "@chakra-ui/react";
 import SideBar from "../pages/Navigation/Sidebar/SideBar";
 import { useLocation } from "react-router-dom";
-import useAuthStore from "../store/authStore";
 import { auth } from "../firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Navbar from "../pages/Navigation/Navbar";

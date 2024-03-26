@@ -1,21 +1,34 @@
 import { Flex, Avatar, VStack, Box, Button } from "@chakra-ui/react";
-import { useState } from "react";
-const SuggestedUser = ({avatar, name, followers}) => {
-	const [isFollowed, setIsFollowed] = useState(false);
+import useAuthStore from "../../store/authStore";
+import useFollowUser from "../../hooks/useFollowUser";
+const SuggestedUser = ({ user, setUser }) => {
+	const {isFollowing, isUpdating, handleFollowUser} = useFollowUser(user.uid)
+	const authUser = useAuthStore(state => state.user)
+	const onFollowUser = async () =>{
+		await handleFollowUser();
+		setUser({
+			...user,
+			followers: isFollowing 
+			? user.followers.filter((follower) => follower.uid !== authUser.uid) 
+			: [...user.followers, authUser],
+		})
+	}
+
 	return (
 		<Flex justifyContent={"space-between"} alignItems={"center"} w={"full"}>
 			<Flex>
-				<Avatar src={avatar} name={name} size={"md"} />
+				<Avatar src={user.profilePicURL} size={"md"} />
 				<VStack spacing={2} mx={2}>
 					<Box fontSize={12} fontWeight={"bold"}>
-						{name}
+						{user.fullName}
 					</Box>
 					<Box fontSize={12} color={"gray.500"}>
-						{followers} followers
+						{user.followers.length} followers
 					</Box>
 				</VStack>
 			</Flex>
-			<Button
+			{authUser.uid !== user.uid && (
+				<Button
 				fontSize={13}
 				bg={"transparent"}
 				p={0}
@@ -24,10 +37,12 @@ const SuggestedUser = ({avatar, name, followers}) => {
 				color={"blue.400"}
 				cursor={"pointer"}
 				_hover={{ color: "white" }}
-				onClick={() => setIsFollowed(!isFollowed)}
+				onClick={onFollowUser}
+				isLoading={isUpdating}
 			>
-				{isFollowed ? "Unfollow" : "Follow"}
+				{isFollowing ? "Unfollow" : "Follow"}
 			</Button>
+			)}
 		</Flex>
 	);
 };
