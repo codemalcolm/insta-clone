@@ -7,35 +7,10 @@ import {
 	NotificationsLogo,
 	SearchLogo,
 } from "../../assets/constants";
-import { AiFillHome } from "react-icons/ai";
 import { MdLogout } from "react-icons/md";
 import useLogout from "../../hooks/useLogout";
 const SideBar = () => {
-	const sidebarItems = [
-		{
-			icon: <AiFillHome size={25} />,
-			text: "Home",
-			link: "/",
-		},
-		{
-			icon: <SearchLogo />,
-			text: "Home",
-			link: "/",
-		},
-		{
-			icon: <NotificationsLogo />,
-			text: "Search",
-		},
-		{
-			icon: <CreatePostLogo />,
-			text: "Create",
-		},
-		{
-			icon: <Avatar size={"sm"} name="Burak Orkmez" src="/profilepic.png" />,
-			text: "Profile",
-			link: "/asaprogrammer",
-		},
-	];
+
 	const { handleLogout, isLoggingOut } = useLogout();
 	return (
 		<Box
