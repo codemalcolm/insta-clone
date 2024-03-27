@@ -3,7 +3,6 @@ import useAuthStore from "../store/authStore";
 import useShowToast from "./useShowToast";
 import {
 	collection,
-	getDoc,
 	getDocs,
 	limit,
 	orderBy,
