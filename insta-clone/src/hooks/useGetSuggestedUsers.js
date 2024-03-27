@@ -14,24 +14,25 @@ import { firestore } from "../firebase/firebase";
 
 const useGetSuggestedUsers = () => {
 	const [isLoading, setIsLoading] = useState(true);
-	const [suggestedUsers, setSuggestedUsers] = useState(true);
+	const [suggestedUsers, setSuggestedUsers] = useState([]);
 	const authUser = useAuthStore((state) => state.user);
 	const showToast = useShowToast();
 
 	useEffect(() => {
 		const getSuggestedUsers = async () => {
-			isLoading(true);
+			setIsLoading(true);
 			try {
 				const usersRef = collection(firestore, "users");
 				const q = query(
 					usersRef,
 					where("uid", "not-in", [authUser.uid, ...authUser.following]),
 					orderBy("uid"),
-					limit(3)
+					limit(2)
 				);
 
 				const querySnapshot = await getDocs(q);
 				const users = [];
+
 				querySnapshot.forEach((doc) => {
 					users.push({ ...doc.data(), id: doc.id });
 				});
@@ -40,10 +41,10 @@ const useGetSuggestedUsers = () => {
 			} catch (error) {
 				showToast("Error", error.message, "error");
 			} finally {
-				isLoading(false);
+				setIsLoading(false);
 			}
 		};
-		if (authUser) getSuggestedUsers;
+		if (authUser) getSuggestedUsers();
 	}, [authUser, showToast]);
     return { isLoading, suggestedUsers}
 };
