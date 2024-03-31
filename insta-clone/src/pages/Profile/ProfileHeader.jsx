@@ -82,7 +82,7 @@ const ProfileHeader = () => {
 				<Flex alignItems={"center"} gap={{ base: 2, sm: 4 }}>
 					<Text fontSize={{ base: "xs", md: "sm" }}>
 						<Text as="span" fontWeight={"bold"} mr={1}>
-							{userProfile.posts.length === 0 ? "0" : userProfile.posts}
+							{userProfile.posts.length}
 						</Text>
 						Posts
 					</Text>

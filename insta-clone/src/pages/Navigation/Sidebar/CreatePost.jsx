@@ -19,8 +19,7 @@ import { useRef, useState } from "react";
 import usePreviewImg from "../../../hooks/usePreviewImg"
 import useShowToast from "../../../hooks/useShowToast";
 import { BsFillImageFill } from "react-icons/bs"
-import usePostStore from "../../../store/postStore";
-import useUserProfileStore from "../../../store/userProfileStore";
+import useCreatePost from "../../../hooks/useCreatePost";
 
 const CreatePost = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,18 +27,19 @@ const CreatePost = () => {
 	const imageRef = useRef(null);
 	const { handleImageChange, selectedFile, setSelectedFile } = usePreviewImg();
 	const showToast = useShowToast();
-	// const { isLoading, handleCreatePost } = useCreatePost();
+	const { isLoading, handleCreatePost } = useCreatePost();
 
-	// const handlePostCreation = async () => {
-	// 	try {
-	// 		await handleCreatePost(selectedFile, caption);
-	// 		onClose();
-	// 		setCaption("");
-	// 		setSelectedFile(null);
-	// 	} catch (error) {
-	// 		showToast("Error", error.message, "error");
-	// 	}
-	// };
+	const handlePostCreation = async () => {
+		try {
+			await handleCreatePost(selectedFile, caption);
+			onClose();
+			setCaption("");
+			setSelectedFile(null);
+		} catch (error) {
+			showToast("Error", error.message, "error");
+		}
+	};
+
 	return (
 		<>
 			<Tooltip
@@ -101,7 +101,7 @@ const CreatePost = () => {
 					</ModalBody>
 
 					<ModalFooter>
-						<Button mr={3}>Post</Button>
+						<Button mr={3} onClick={handlePostCreation} isLoading={isLoading}>Post</Button>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
@@ -111,32 +111,4 @@ const CreatePost = () => {
 
 export default CreatePost;
 
-function userCreatePost () {
-	const showToast = useShowToast;
-	const [isLoading, setIsLoading] = useState(false)
-	const authUser = useAuthStore((state)=> state.user)
-	const createPost = usePostStore((state)=> state.createPost)
-	const addPost = useUserProfileStore((state) => state.addPost)
-	const {pathname} = useLocation()
 
-	const handleCreatePost = async (selectedFile,caption) => {
-		if(!selectedFile) throw new Error["Please select an image"]
-		setIsLoading(true)
-		const newPost = {
-			caption:caption,
-			likes:[],
-			comments:[],
-			createdAt: Date.now(),
-			createdBy: authUser.uid,
-		}
-
-		try {
-			const postDocRef = await addDoc(collection(firestore,"posts"))
-
-		} catch (error) {
-			showToast("Error", error.message, "error")
-		}finally {
-			setIsLoading(false)
-		}
-	}
-}
