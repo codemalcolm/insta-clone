@@ -13,9 +13,20 @@ import {
 	NotificationsLogo,
 	UnlikeLogo,
 } from "../../assets/constants";
-const PostFooter = ({username, isProfilePage}) => {
+import usePostComment from "../../hooks/usePostComment";
+import useAuthStore from "../../store/authStore";
+const PostFooter = ({post, username, isProfilePage}) => {
 	const [liked, setLiked] = useState(false);
 	const [likes, setLikes] = useState(1000);
+	const {isCommenting, handlePostComment }= usePostComment()
+	const [comment, setComment] = useState("")
+	const authUser = useAuthStore((state) => state.user)
+
+	const handleSubmitComment = async () => {
+		await handlePostComment(post.id,comment)
+		setComment("")
+	}
+
 	const handleLike = () => {
 		if (liked) {
 			setLiked(false);
@@ -51,30 +62,38 @@ const PostFooter = ({username, isProfilePage}) => {
 					</Text>
 				</>
 			)}
-			<Flex
-				alignItems={"center"}
-				gap={2}
-				justifyContent={"space-between"}
-				w={"full"}
-			>
-				<InputGroup mt={2} mb={10}>
-					<Input variant={"flushed"} placeholder="Add a comment" />
-					<InputRightElement>
-						<Button
-							fontSize={14}
-							color={"blue.500"}
-							fontWeight={"600"}
-							height={6}
-							cursor={"pointer"}
-							_hover={{ color: "blue.300" }}
-							bg={"transparent"}
-              transition={"0.2s ease-in-out"}
-						>
-							Post
-						</Button>
-					</InputRightElement>
-				</InputGroup>
-			</Flex>
+
+			{authUser && (
+					<Flex
+					alignItems={"center"}
+					gap={2}
+					justifyContent={"space-between"}
+					w={"full"}
+				>
+					<InputGroup mt={2} mb={10}>
+						<Input variant={"flushed"} placeholder="Add a comment" fontSize={14}
+							onChange={(e)=> setComment(e.target.value)}
+							value={comment}
+						/>
+						<InputRightElement>
+							<Button
+								fontSize={14}
+								color={"blue.500"}
+								fontWeight={"600"}
+								height={6}
+								cursor={"pointer"}
+								_hover={{ color: "blue.300" }}
+								bg={"transparent"}
+				transition={"0.2s ease-in-out"}
+								onClick={handleSubmitComment}
+								isLoading={isCommenting}
+							>
+								Post
+							</Button>
+						</InputRightElement>
+					</InputGroup>
+				</Flex>
+			)}
 		</>
 	);
 };
